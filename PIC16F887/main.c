@@ -1,7 +1,7 @@
-// PIC16F887 — Receptor de comandos y reproductor de melodías
+// PIC16F887 Receptor de comandos y reproductor de melodias
 // MikroC for PIC, oscilador externo 8 MHz
 
-// Configuración de bits (MikroC pragma)
+// Configuracion de bits (MikroC pragma)
 // Config: XT oscillator, WDT off, MCLR on, LVP off
 // Bits de config en MikroC: Project > Edit Project > Device Flags
 
@@ -10,7 +10,7 @@
 #define STROBE_PIN  RB3_bit
 
 // -- Buzzer en RC2 (CCP1, PWM Timer2) --------------------
-// MikroC tiene librería Sound que usa RC2 automáticamente
+// MikroC tiene libreria Sound que usa RC2 automaticamente
 
 // -- Frecuencias de cada color (Hz) ----------------------
 #define FREQ_GREEN   262u   // Do4
@@ -18,7 +18,7 @@
 #define FREQ_BLUE    392u   // Sol4
 #define FREQ_YELLOW  523u   // Do5
 
-// -- Duración nota simple (ms) ----------------------------
+// -- Duracion nota simple (ms) ----------------------------
 #define NOTE_DUR     400u
 
 // -- Prototipos -------------------------------------------
@@ -30,7 +30,7 @@ void process_command(unsigned char cmd);
 
 // -- Leer bus: 3 bits de datos ----------------------------
 unsigned char read_bus(void) {
-    return (unsigned char)(PORTB & 0x07);  // máscara bits 0-2
+    return (unsigned char)(PORTB & 0x07);  // mascara bits 0-2
 }
 
 // -- Tocar nota usando Sound_Play de MikroC ---------------
@@ -38,9 +38,9 @@ void play_note(unsigned int freq, unsigned int dur_ms) {
     Sound_Play(freq, dur_ms);
 }
 
-// -- Melodías de evento -----------------------------------
+// -- Melodias de evento -----------------------------------
 void melody_start(void) {
-    // Escala ascendente rápida
+    // Escala ascendente rapida
     play_note(262, 120);
     play_note(330, 120);
     play_note(392, 120);
@@ -85,7 +85,7 @@ void main(void) {
     TRISB = 0xFF;
     TRISC = 0x00;   // RC2 salida (PWM buzzer)
 
-    // Inicializar librería Sound (usa Timer2 + CCP1 en RC2)
+    // Inicializar libreria Sound (usa Timer2 + CCP1 en RC2)
     Sound_Init(&PORTC, 2);  // RC2
 
     while (1) {
